@@ -497,32 +497,55 @@ footer {
 }
 
 .menu-visual {
-  height: 190px;
+  min-height: 124px;
+  padding: 16px;
   border-radius: 0;
-  background: #eee5d7;
+  background:
+    linear-gradient(135deg, rgba(18, 63, 89, 0.08), rgba(217, 154, 43, 0.16)),
+    var(--paper);
   overflow: hidden;
   position: relative;
+  display: flex;
+  align-items: flex-end;
 }
 
-.menu-visual::after {
+.menu-visual::before {
   content: "";
   position: absolute;
-  inset: auto 0 0;
-  height: 60%;
-  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.42));
-  pointer-events: none;
+  width: 168px;
+  height: 168px;
+  right: -42px;
+  top: -68px;
+  border-radius: 50%;
+  background: rgba(255, 253, 248, 0.72);
+  border: 1px solid rgba(18, 63, 89, 0.08);
 }
 
-.menu-visual img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  transition: transform 220ms ease;
+.menu-symbol {
+  position: absolute;
+  right: 22px;
+  bottom: 8px;
+  color: rgba(18, 63, 89, 0.11);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 6.8rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
-.menu-card:hover .menu-visual img {
-  transform: scale(1.05);
+.menu-visual.beverages {
+  background: linear-gradient(135deg, rgba(10, 106, 66, 0.1), rgba(217, 154, 43, 0.18)), var(--paper);
+}
+
+.menu-visual.appetizers {
+  background: linear-gradient(135deg, rgba(217, 154, 43, 0.17), rgba(166, 41, 34, 0.09)), var(--paper);
+}
+
+.menu-visual.mains {
+  background: linear-gradient(135deg, rgba(18, 63, 89, 0.12), rgba(10, 106, 66, 0.1)), var(--paper);
+}
+
+.menu-visual.desserts {
+  background: linear-gradient(135deg, rgba(122, 50, 155, 0.1), rgba(217, 154, 43, 0.16)), var(--paper);
 }
 
 .menu-badge {
@@ -542,7 +565,7 @@ footer {
 
 .chef-pick {
   position: absolute;
-  top: 12px;
+  top: 14px;
   right: 12px;
   z-index: 1;
   padding: 7px 10px;

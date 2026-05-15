@@ -5,7 +5,6 @@ const menuItems = [
     category: "beverages",
     price: 3,
     detail: "Fresh lemon, mint and ice.",
-    image: "https://loremflickr.com/640/420/lemonade?lock=101",
   },
   {
     id: "iced-tea",
@@ -13,7 +12,6 @@ const menuItems = [
     category: "beverages",
     price: 3,
     detail: "House iced tea with citrus.",
-    image: "https://loremflickr.com/640/420/iced,tea?lock=102",
   },
   {
     id: "tropical-juice",
@@ -21,7 +19,6 @@ const menuItems = [
     category: "beverages",
     price: 4,
     detail: "Fresh seasonal tropical juice.",
-    image: "https://loremflickr.com/640/420/tropical,juice?lock=103",
   },
   {
     id: "smoothie",
@@ -29,7 +26,6 @@ const menuItems = [
     category: "beverages",
     price: 5,
     detail: "Creamy tropical fruit smoothie.",
-    image: "https://loremflickr.com/640/420/smoothie?lock=104",
   },
   {
     id: "bottled-water",
@@ -37,7 +33,6 @@ const menuItems = [
     category: "beverages",
     price: 2,
     detail: "Chilled individual water.",
-    image: "https://loremflickr.com/640/420/bottled,water?lock=105",
   },
   {
     id: "garlic-bread",
@@ -45,7 +40,6 @@ const menuItems = [
     category: "appetizers",
     price: 4,
     detail: "Toasted bread with garlic butter.",
-    image: "https://loremflickr.com/640/420/garlic,bread?lock=106",
   },
   {
     id: "caesar-salad",
@@ -53,7 +47,6 @@ const menuItems = [
     category: "appetizers",
     price: 5,
     detail: "Romaine lettuce, croutons and parmesan.",
-    image: "https://loremflickr.com/640/420/caesar,salad?lock=107",
   },
   {
     id: "chicken-wings",
@@ -61,7 +54,6 @@ const menuItems = [
     category: "appetizers",
     price: 6,
     detail: "Golden wings with house sauce.",
-    image: "https://loremflickr.com/640/420/chicken,wings?lock=108",
   },
   {
     id: "stuffed-mushrooms",
@@ -69,7 +61,6 @@ const menuItems = [
     category: "appetizers",
     price: 6,
     detail: "Baked stuffed mushrooms with cheese.",
-    image: "https://loremflickr.com/640/420/stuffed,mushrooms?lock=109",
   },
   {
     id: "shrimp-cocktail",
@@ -77,7 +68,6 @@ const menuItems = [
     category: "appetizers",
     price: 7,
     detail: "Chilled shrimp with tropical sauce.",
-    image: "https://loremflickr.com/640/420/shrimp,cocktail?lock=110",
   },
   {
     id: "grilled-chicken",
@@ -85,7 +75,6 @@ const menuItems = [
     category: "mains",
     price: 12,
     detail: "Grilled chicken breast with vegetables.",
-    image: "https://loremflickr.com/640/420/grilled,chicken?lock=111",
   },
   {
     id: "beef-steak",
@@ -93,7 +82,6 @@ const menuItems = [
     category: "mains",
     price: 16,
     detail: "Beef cut with rustic potatoes.",
-    image: "https://loremflickr.com/640/420/beef,steak?lock=112",
   },
   {
     id: "shrimp-pasta",
@@ -101,7 +89,6 @@ const menuItems = [
     category: "mains",
     price: 14,
     detail: "Creamy pasta with sauteed shrimp.",
-    image: "https://loremflickr.com/640/420/shrimp,pasta?lock=113",
   },
   {
     id: "caribbean-fish",
@@ -109,7 +96,6 @@ const menuItems = [
     category: "mains",
     price: 15,
     detail: "Local fish with rice and salad.",
-    image: "https://loremflickr.com/640/420/grilled,fish?lock=114",
   },
   {
     id: "veggie-stir-fry",
@@ -117,7 +103,6 @@ const menuItems = [
     category: "mains",
     price: 11,
     detail: "Sauteed vegetables with jasmine rice.",
-    image: "https://loremflickr.com/640/420/vegetable,stir,fry?lock=115",
   },
   {
     id: "chocolate-cake",
@@ -125,7 +110,6 @@ const menuItems = [
     category: "desserts",
     price: 5,
     detail: "Moist cocoa cake.",
-    image: "https://loremflickr.com/640/420/chocolate,cake?lock=116",
   },
   {
     id: "cheesecake",
@@ -133,7 +117,6 @@ const menuItems = [
     category: "desserts",
     price: 5,
     detail: "Cheesecake with strawberry sauce.",
-    image: "https://loremflickr.com/640/420/cheesecake?lock=117",
   },
   {
     id: "mango-mousse",
@@ -141,7 +124,6 @@ const menuItems = [
     category: "desserts",
     price: 5,
     detail: "Smooth Dominican mango mousse.",
-    image: "https://loremflickr.com/640/420/mango,dessert?lock=118",
   },
   {
     id: "ice-cream",
@@ -149,7 +131,6 @@ const menuItems = [
     category: "desserts",
     price: 4,
     detail: "Two scoops of artisan ice cream.",
-    image: "https://loremflickr.com/640/420/ice,cream?lock=119",
   },
   {
     id: "fruit-platter",
@@ -157,7 +138,6 @@ const menuItems = [
     category: "desserts",
     price: 4,
     detail: "Fresh seasonal fruit.",
-    image: "https://loremflickr.com/640/420/fruit,platter?lock=120",
   },
   {
     id: "signature-dish",
@@ -165,7 +145,6 @@ const menuItems = [
     category: "mains",
     price: 18,
     detail: "Fish with mango salsa, rice and vegetables.",
-    image: "https://loremflickr.com/640/420/tropical,fish,dish?lock=121",
     featured: true,
   },
 ];
@@ -195,7 +174,7 @@ function renderMenu() {
       (item) => `
         <article class="menu-card ${item.featured ? "featured" : ""}">
           <div class="menu-visual ${item.category}">
-            <img src="${item.image}" alt="${item.name}" loading="lazy">
+            <span class="menu-symbol" aria-hidden="true">${categorySymbol(item.category)}</span>
             <span class="menu-badge">${categoryLabel(item.category)}</span>
             ${item.featured ? '<span class="chef-pick">Chef pick</span>' : ""}
           </div>
@@ -222,6 +201,17 @@ function categoryLabel(category) {
   };
 
   return labels[category] || "Menu item";
+}
+
+function categorySymbol(category) {
+  const symbols = {
+    beverages: "D",
+    appetizers: "A",
+    mains: "M",
+    desserts: "S",
+  };
+
+  return symbols[category] || "D";
 }
 
 function addItem(id) {
