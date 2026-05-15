@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Double Click</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/double-click-logo.svg?v=2" />
+    <link rel="shortcut icon" href="./assets/double-click-logo.svg?v=2" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=5" />
+  </head>
+  <body>
+    <header class="app-header">
+      <nav class="topbar" aria-label="Main">
+        <a class="brand" href="#home" aria-label="Double Click home">
+          <img class="brand-logo" src="./assets/double-click-logo.svg" alt="Double Click logo" />
+          <span>
+            <strong>Double Click</strong>
+            <small>Tropical fusion dining</small>
+          </span>
+        </a>
+        <div class="nav-links">
+          <a href="#menu">Menu</a>
+          <a href="#roles">Roles</a>
+          <a href="#order">Order</a>
+        </div>
+      </nav>
+
+      <section class="hero" id="home">
+        <div class="hero-copy">
+          <p class="eyebrow">Sosua, Dominican Republic</p>
+          <h1>Double Click</h1>
+          <p class="tagline">
+            A fresh casual dining experience with bold flavor, fast service and a tech-inspired personality.
+          </p>
+          <div class="hero-meta" aria-label="Quick facts">
+            <span>Open today</span>
+            <span>Reservations available</span>
+            <span>Prices in USD</span>
+          </div>
+          <div class="hero-actions">
+            <a class="primary-action" href="#menu">View menu</a>
+          </div>
+        </div>
+        <div class="hero-plate logo-showcase" aria-label="Double Click logo">
+          <img src="./assets/double-click-logo.svg" alt="Double Click restaurant logo" />
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="info-band" aria-label="Restaurant information">
+        <article>
+          <span class="info-icon">i</span>
+          <h2>Type</h2>
+          <p>Casual dining restaurant with a tropical fusion atmosphere.</p>
+        </article>
+        <article>
+          <span class="info-icon">$</span>
+          <h2>USD Prices</h2>
+          <p>Drinks and dishes from <strong>$2.00</strong> to <strong>$22.00</strong>.</p>
+        </article>
+        <article>
+          <span class="info-icon">m</span>
+          <h2>Mission</h2>
+          <p>To serve fresh food, clear service and memorable experiences.</p>
+        </article>
+      </section>
+
+      <section class="section" id="menu">
+        <div class="section-heading">
+          <p class="eyebrow">Digital Menu</p>
+          <h2>Menu with dollar prices</h2>
+        </div>
+        <div class="menu-controls" role="tablist" aria-label="Menu categories">
+          <button class="tab active" data-category="all" role="tab" aria-selected="true">All</button>
+          <button class="tab" data-category="beverages" role="tab" aria-selected="false">Beverages</button>
+          <button class="tab" data-category="appetizers" role="tab" aria-selected="false">Appetizers</button>
+          <button class="tab" data-category="mains" role="tab" aria-selected="false">Main Courses</button>
+          <button class="tab" data-category="desserts" role="tab" aria-selected="false">Desserts</button>
+        </div>
+        <div class="menu-grid" id="menuGrid"></div>
+      </section>
+
+      <section class="section roles-section" id="roles">
+        <div class="section-heading">
+          <p class="eyebrow">Team</p>
+          <h2>Restaurant roles</h2>
+        </div>
+        <div class="roles-grid">
+          <article class="role-card">
+            <div class="role-avatar host-avatar"></div>
+            <h3>Host</h3>
+            <p>Greets customers, confirms reservations and guides guests to their table.</p>
+          </article>
+          <article class="role-card">
+            <div class="role-avatar server-avatar"></div>
+            <h3>Server</h3>
+            <p>Takes orders, serves drinks and keeps the experience clear and pleasant.</p>
+          </article>
+          <article class="role-card">
+            <div class="role-avatar chef-avatar"></div>
+            <h3>Chef 1</h3>
+            <p>Prepares appetizers and main courses with fresh local ingredients.</p>
+          </article>
+          <article class="role-card">
+            <div class="role-avatar chef-avatar alt"></div>
+            <h3>Chef 2</h3>
+            <p>Prepares desserts and presents the chef's specialty to the customer.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section order-section" id="order">
+        <div class="section-heading">
+          <p class="eyebrow">Order Builder</p>
+          <h2>Table order</h2>
+        </div>
+        <div class="order-layout">
+          <div class="chef-special">
+            <p class="eyebrow">Specialty</p>
+            <h3>Chef's Tropical Signature Dish</h3>
+            <p>Grilled fish with mango salsa, aromatic rice and sauteed vegetables.</p>
+            <button class="primary-action button-reset" id="addSpecial">Add $18.00</button>
+          </div>
+          <div class="receipt">
+            <div class="receipt-top">
+              <h3>Current order</h3>
+              <button class="text-button" id="clearOrder">Clear</button>
+            </div>
+            <ul id="orderList"></ul>
+            <div class="receipt-total">
+              <span>Total</span>
+              <strong id="orderTotal">$0.00</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>123 Ocean Drive, Sosua</span>
+      <strong>Good food. Good service. Great memories.</strong>
+    </footer>
+
+    <script src="./app.js?v=6"></script>
+  </body>
+</html>
