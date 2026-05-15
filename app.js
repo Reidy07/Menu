@@ -166,6 +166,7 @@ const menuItems = [
     price: 18,
     detail: "Fish with mango salsa, rice and vegetables.",
     image: "https://loremflickr.com/640/420/tropical,fish,dish?lock=121",
+    featured: true,
   },
 ];
 
@@ -192,16 +193,19 @@ function renderMenu() {
   menuGrid.innerHTML = items
     .map(
       (item) => `
-        <article class="menu-card">
+        <article class="menu-card ${item.featured ? "featured" : ""}">
           <div class="menu-visual ${item.category}">
             <img src="${item.image}" alt="${item.name}" loading="lazy">
             <span class="menu-badge">${categoryLabel(item.category)}</span>
+            ${item.featured ? '<span class="chef-pick">Chef pick</span>' : ""}
           </div>
-          <h3>${item.name}</h3>
-          <p>${item.detail}</p>
+          <div class="menu-card-body">
+            <h3>${item.name}</h3>
+            <p>${item.detail}</p>
+          </div>
           <div class="price-row">
             <span class="price">${formatUsd(item.price)}</span>
-            <button type="button" data-add="${item.id}" aria-label="Add ${item.name}">+</button>
+            <button type="button" data-add="${item.id}" aria-label="Add ${item.name}">Add</button>
           </div>
         </article>
       `,

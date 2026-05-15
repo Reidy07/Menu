@@ -391,6 +391,30 @@ footer {
   letter-spacing: 0;
 }
 
+.menu-head {
+  padding: 28px;
+  border: 1px solid rgba(18, 63, 89, 0.12);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(255, 248, 232, 0.86)),
+    radial-gradient(circle at 84% 26%, rgba(217, 154, 43, 0.16), transparent 260px);
+  box-shadow: 0 14px 34px rgba(21, 26, 23, 0.08);
+  margin-bottom: 16px;
+}
+
+.menu-head .section-heading {
+  margin-bottom: 0;
+}
+
+.menu-note {
+  max-width: 360px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
 .compact {
   display: block;
   margin-bottom: 18px;
@@ -403,18 +427,28 @@ footer {
 .menu-controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 18px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .tab {
-  min-height: 40px;
-  padding: 0 16px;
+  min-height: 44px;
+  padding: 0 18px;
   border-radius: 999px;
   background: rgba(255, 253, 248, 0.86);
   border: 1px solid var(--line);
   color: var(--muted);
   font-weight: 800;
+  box-shadow: 0 8px 18px rgba(21, 26, 23, 0.04);
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    background 150ms ease;
+}
+
+.tab:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(21, 26, 23, 0.08);
 }
 
 .tab.active {
@@ -426,7 +460,7 @@ footer {
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
 .menu-card,
@@ -441,10 +475,11 @@ footer {
 
 .menu-card {
   padding: 0;
-  min-height: 318px;
+  min-height: 360px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
   transition:
     transform 160ms ease,
     box-shadow 160ms ease,
@@ -452,17 +487,30 @@ footer {
 }
 
 .menu-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: rgba(10, 106, 66, 0.28);
-  box-shadow: 0 18px 38px rgba(21, 26, 23, 0.11);
+  box-shadow: 0 22px 48px rgba(21, 26, 23, 0.14);
+}
+
+.menu-card.featured {
+  border-color: rgba(217, 154, 43, 0.58);
 }
 
 .menu-visual {
-  height: 164px;
+  height: 190px;
   border-radius: 0;
   background: #eee5d7;
   overflow: hidden;
   position: relative;
+}
+
+.menu-visual::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 60%;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.42));
+  pointer-events: none;
 }
 
 .menu-visual img {
@@ -481,6 +529,7 @@ footer {
   position: absolute;
   left: 12px;
   bottom: 12px;
+  z-index: 1;
   padding: 6px 9px;
   border-radius: 999px;
   background: rgba(255, 253, 248, 0.92);
@@ -491,14 +540,34 @@ footer {
   letter-spacing: 0.04em;
 }
 
+.chef-pick {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: var(--sun);
+  color: #231811;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: 0 10px 20px rgba(21, 26, 23, 0.18);
+}
+
+.menu-card-body {
+  padding: 18px 18px 0;
+}
+
 .menu-card h3 {
-  margin: 16px 16px 0;
+  margin: 0;
   font-size: 1.08rem;
   line-height: 1.25;
 }
 
 .menu-card p {
-  margin: 0 16px;
+  margin: 8px 0 0;
 }
 
 .menu-card .price-row {
@@ -507,23 +576,36 @@ footer {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 0 16px 16px;
+  padding: 18px;
+  border-top: 1px solid rgba(226, 216, 200, 0.72);
 }
 
 .price {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #f8f1e6;
   font-weight: 900;
   color: var(--tomato);
   white-space: nowrap;
 }
 
 .menu-card button {
-  min-width: 44px;
+  min-width: 76px;
   min-height: 40px;
+  padding: 0 16px;
   border-radius: 8px;
   background: var(--leaf);
   color: white;
-  font-size: 1.3rem;
+  font-size: 0.92rem;
   font-weight: 800;
+  box-shadow: 0 10px 20px rgba(10, 106, 66, 0.2);
+}
+
+.menu-card button:hover {
+  background: var(--leaf-dark);
 }
 
 .roles-grid {
@@ -741,6 +823,10 @@ footer strong {
   footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .menu-head {
+    padding: 20px;
   }
 
   .chef-special,
