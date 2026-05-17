@@ -1,162 +1,134 @@
 const menuItems = [
   {
-    id: "lemonade",
-    name: "Lemonade",
+    id: "double-click-pizza",
+    name: "The Double Click",
+    category: "pizzas",
+    price: 18.99,
+    detail: "Pepperoni, Italian sausage, mushrooms, red onions and bell peppers on a thick crust.",
+    featured: true,
+  },
+  {
+    id: "open-source-margherita",
+    name: "Open Source Margherita",
+    category: "pizzas",
+    price: 15.99,
+    detail: "San Marzano tomatoes, fresh mozzarella and micro-basil leaf garnish.",
+  },
+  {
+    id: "debug-diavola",
+    name: "Debug Diavola",
+    category: "pizzas",
+    price: 16.99,
+    detail: "Spicy salami, mozzarella, chili oil and roasted garlic.",
+  },
+  {
+    id: "cloud-cuatro-quesos",
+    name: "Cloud Cuatro Quesos",
+    category: "pizzas",
+    price: 17.99,
+    detail: "Mozzarella, gorgonzola, provolone and parmesan with white truffle oil.",
+  },
+  {
+    id: "admin-garlic-knots",
+    name: "Admin Garlic Knots",
+    category: "sides",
+    price: 6.99,
+    detail: "Soft garlic knots brushed with herb butter and parmesan.",
+  },
+  {
+    id: "plug-play-caesar",
+    name: "Caesar Salad 'Plug & Play'",
+    category: "sides",
+    price: 10.99,
+    detail: "Crisp romaine, parmesan, croutons and creamy Caesar dressing.",
+  },
+  {
+    id: "loaded-pizza-fries",
+    name: "Loaded Pizza Fries",
+    category: "sides",
+    price: 8.99,
+    detail: "Crispy fries with marinara, mozzarella and pepperoni bits.",
+  },
+  {
+    id: "fresh-lemonade",
+    name: "Fresh Lemonade",
     category: "beverages",
-    price: 3,
-    detail: "Fresh lemon, mint and ice.",
+    price: 3.5,
+    detail: "Lemon, mint and sparkling water.",
+  },
+  {
+    id: "strawberry-smoothie",
+    name: "Strawberry Smoothie",
+    category: "beverages",
+    price: 4.99,
+    detail: "Creamy strawberry drink served cold.",
+  },
+  {
+    id: "mango-juice",
+    name: "Mango Juice",
+    category: "beverages",
+    price: 4.5,
+    detail: "Fresh mango flavor with a tropical finish.",
   },
   {
     id: "iced-tea",
     name: "Iced Tea",
     category: "beverages",
-    price: 3,
+    price: 2.75,
     detail: "House iced tea with citrus.",
-  },
-  {
-    id: "tropical-juice",
-    name: "Tropical Juice",
-    category: "beverages",
-    price: 4,
-    detail: "Fresh seasonal tropical juice.",
-  },
-  {
-    id: "smoothie",
-    name: "Smoothie",
-    category: "beverages",
-    price: 5,
-    detail: "Creamy tropical fruit smoothie.",
   },
   {
     id: "bottled-water",
     name: "Bottled Water",
     category: "beverages",
-    price: 2,
+    price: 1.99,
     detail: "Chilled individual water.",
   },
   {
-    id: "garlic-bread",
-    name: "Garlic Bread",
-    category: "appetizers",
-    price: 4,
-    detail: "Toasted bread with garlic butter.",
-  },
-  {
-    id: "caesar-salad",
-    name: "Caesar Salad",
-    category: "appetizers",
-    price: 5,
-    detail: "Romaine lettuce, croutons and parmesan.",
-  },
-  {
-    id: "chicken-wings",
-    name: "Chicken Wings",
-    category: "appetizers",
-    price: 6,
-    detail: "Golden wings with house sauce.",
-  },
-  {
-    id: "stuffed-mushrooms",
-    name: "Stuffed Mushrooms",
-    category: "appetizers",
-    price: 6,
-    detail: "Baked stuffed mushrooms with cheese.",
-  },
-  {
-    id: "shrimp-cocktail",
-    name: "Shrimp Cocktail",
-    category: "appetizers",
-    price: 7,
-    detail: "Chilled shrimp with tropical sauce.",
-  },
-  {
-    id: "grilled-chicken",
-    name: "Grilled Chicken",
-    category: "mains",
-    price: 12,
-    detail: "Grilled chicken breast with vegetables.",
-  },
-  {
-    id: "beef-steak",
-    name: "Beef Steak",
-    category: "mains",
-    price: 16,
-    detail: "Beef cut with rustic potatoes.",
-  },
-  {
-    id: "shrimp-pasta",
-    name: "Shrimp Pasta",
-    category: "mains",
-    price: 14,
-    detail: "Creamy pasta with sauteed shrimp.",
-  },
-  {
-    id: "caribbean-fish",
-    name: "Caribbean Fish",
-    category: "mains",
-    price: 15,
-    detail: "Local fish with rice and salad.",
-  },
-  {
-    id: "veggie-stir-fry",
-    name: "Veggie Stir Fry",
-    category: "mains",
-    price: 11,
-    detail: "Sauteed vegetables with jasmine rice.",
-  },
-  {
-    id: "chocolate-cake",
-    name: "Chocolate Cake",
-    category: "desserts",
-    price: 5,
-    detail: "Moist cocoa cake.",
-  },
-  {
-    id: "cheesecake",
-    name: "Cheesecake",
-    category: "desserts",
-    price: 5,
-    detail: "Cheesecake with strawberry sauce.",
-  },
-  {
-    id: "mango-mousse",
-    name: "Mango Mousse",
-    category: "desserts",
-    price: 5,
-    detail: "Smooth Dominican mango mousse.",
-  },
-  {
-    id: "ice-cream",
-    name: "Ice Cream",
-    category: "desserts",
-    price: 4,
-    detail: "Two scoops of artisan ice cream.",
-  },
-  {
-    id: "fruit-platter",
-    name: "Fruit Platter",
-    category: "desserts",
-    price: 4,
-    detail: "Fresh seasonal fruit.",
-  },
-  {
-    id: "signature-dish",
-    name: "Chef's Tropical Signature Dish",
-    category: "mains",
-    price: 18,
-    detail: "Fish with mango salsa, rice and vegetables.",
+    id: "double-click-special",
+    name: "Double Click Special Drink",
+    category: "beverages",
+    price: 6.99,
+    detail: "Lemonade, strawberry syrup, mint and sparkling water. Perfect with pizza.",
     featured: true,
+  },
+  {
+    id: "panna-cotta-cache",
+    name: "Panna Cotta 'Cache'",
+    category: "desserts",
+    price: 8.99,
+    detail: "Silky vanilla panna cotta with berry sauce.",
+  },
+  {
+    id: "tiramisu-terminal",
+    name: "Tiramisu Terminal",
+    category: "desserts",
+    price: 7.99,
+    detail: "Coffee-soaked layers with mascarpone cream.",
   },
 ];
 
 const state = {
   filter: "all",
   order: [],
+  rewardUnlocked: false,
+  gameRunning: false,
+  gameScore: 0,
+  gameTime: 15,
+  timer: null,
 };
 
 const menuGrid = document.querySelector("#menuGrid");
 const orderList = document.querySelector("#orderList");
 const orderTotal = document.querySelector("#orderTotal");
+const gameScore = document.querySelector("#gameScore");
+const gameTime = document.querySelector("#gameTime");
+const rewardBadge = document.querySelector("#rewardBadge");
+const startGame = document.querySelector("#startGame");
+const resetGame = document.querySelector("#resetGame");
+const gameMessage = document.querySelector("#gameMessage");
+const gameBoard = document.querySelector("#gameBoard");
+const sliceTarget = document.querySelector("#sliceTarget");
 
 function formatUsd(value) {
   return new Intl.NumberFormat("en-US", {
@@ -194,9 +166,9 @@ function renderMenu() {
 
 function categoryLabel(category) {
   const labels = {
-    beverages: "Beverage",
-    appetizers: "Appetizer",
-    mains: "Main course",
+    pizzas: "Pizza",
+    beverages: "Drink",
+    sides: "Side",
     desserts: "Dessert",
   };
 
@@ -205,13 +177,13 @@ function categoryLabel(category) {
 
 function categorySymbol(category) {
   const symbols = {
+    pizzas: "P",
     beverages: "D",
-    appetizers: "A",
-    mains: "M",
-    desserts: "S",
+    sides: "S",
+    desserts: "T",
   };
 
-  return symbols[category] || "D";
+  return symbols[category] || "P";
 }
 
 function addItem(id) {
@@ -236,6 +208,10 @@ function removeItem(id) {
   renderOrder();
 }
 
+function getSubtotal() {
+  return state.order.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
 function renderOrder() {
   if (state.order.length === 0) {
     orderList.innerHTML = "<li><span>No items yet</span><span></span><span></span></li>";
@@ -255,8 +231,100 @@ function renderOrder() {
     )
     .join("");
 
-  const total = state.order.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  orderTotal.textContent = formatUsd(total);
+  const subtotal = getSubtotal();
+  const discount = state.rewardUnlocked ? Math.min(3, subtotal) : 0;
+  orderTotal.textContent = formatUsd(subtotal - discount);
+
+  if (state.rewardUnlocked && !document.querySelector(".reward-line")) {
+    orderList.insertAdjacentHTML(
+      "beforeend",
+      `<li class="reward-line"><span>Mini game reward</span><strong>-${formatUsd(discount)}</strong><span></span></li>`,
+    );
+  }
+}
+
+function updateGameDisplay() {
+  gameScore.textContent = state.gameScore;
+  gameTime.textContent = state.gameTime;
+  rewardBadge.textContent = state.rewardUnlocked ? "Reward unlocked: $3 off" : "Reward locked";
+  rewardBadge.classList.toggle("unlocked", state.rewardUnlocked);
+}
+
+function moveSlice() {
+  const board = gameBoard.getBoundingClientRect();
+  const targetSize = 54;
+  const maxX = Math.max(0, board.width - targetSize);
+  const maxY = Math.max(0, board.height - targetSize);
+  const x = Math.floor(Math.random() * maxX);
+  const y = Math.floor(Math.random() * maxY);
+  const rotation = Math.floor(Math.random() * 180) - 90;
+
+  sliceTarget.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
+}
+
+function finishGame(message) {
+  state.gameRunning = false;
+  clearInterval(state.timer);
+  startGame.disabled = false;
+  sliceTarget.classList.remove("active");
+  gameMessage.textContent = message;
+  updateGameDisplay();
+  renderOrder();
+}
+
+function startMiniGame() {
+  state.gameRunning = true;
+  state.rewardUnlocked = false;
+  state.gameScore = 0;
+  state.gameTime = 15;
+  startGame.disabled = true;
+  sliceTarget.classList.add("active");
+  gameMessage.textContent = "Catch 12 slices before time runs out.";
+  updateGameDisplay();
+  moveSlice();
+
+  clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.gameTime -= 1;
+    updateGameDisplay();
+
+    if (state.gameTime <= 0) {
+      if (state.gameScore >= 12) {
+        state.rewardUnlocked = true;
+        finishGame("You won! Your $3 reward is unlocked.");
+      } else {
+        finishGame("Time is up. Reset and try again for the reward.");
+      }
+    }
+  }, 1000);
+}
+
+function resetMiniGame() {
+  state.gameRunning = false;
+  state.gameScore = 0;
+  state.gameTime = 15;
+  state.rewardUnlocked = false;
+  clearInterval(state.timer);
+  startGame.disabled = false;
+  sliceTarget.classList.remove("active");
+  sliceTarget.style.transform = "translate(50%, 50%)";
+  gameMessage.textContent = "Press start, then catch the slice as fast as you can.";
+  updateGameDisplay();
+  renderOrder();
+}
+
+function catchSlice() {
+  if (!state.gameRunning) return;
+
+  state.gameScore += 1;
+  gameMessage.textContent = state.gameScore >= 9 ? "Almost there. Keep clicking!" : "Nice catch!";
+  updateGameDisplay();
+  moveSlice();
+
+  if (state.gameScore >= 12) {
+    state.rewardUnlocked = true;
+    finishGame("You won! Your $3 reward is unlocked.");
+  }
 }
 
 document.querySelector(".menu-controls").addEventListener("click", (event) => {
@@ -282,11 +350,17 @@ orderList.addEventListener("click", (event) => {
   if (button) removeItem(button.dataset.remove);
 });
 
-document.querySelector("#addSpecial").addEventListener("click", () => addItem("signature-dish"));
+document.querySelector("#addSpecial").addEventListener("click", () => addItem("double-click-pizza"));
 document.querySelector("#clearOrder").addEventListener("click", () => {
   state.order = [];
   renderOrder();
 });
 
+startGame.addEventListener("click", startMiniGame);
+resetGame.addEventListener("click", resetMiniGame);
+sliceTarget.addEventListener("click", catchSlice);
+
 renderMenu();
 renderOrder();
+updateGameDisplay();
+sliceTarget.classList.remove("active");

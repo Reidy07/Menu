@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800;900&family=Pacifico&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=7" />
+    <link rel="stylesheet" href="./styles.css?v=10" />
   </head>
   <body>
     <header class="app-header">
@@ -21,12 +21,12 @@
           <img class="brand-logo" src="./assets/double-click-logo.svg" alt="Double Click logo" />
           <span>
             <strong>Double Click</strong>
-            <small>Tropical fusion dining</small>
+            <small>Pizzeria</small>
           </span>
         </a>
         <div class="nav-links">
           <a href="#menu">Menu</a>
-          <a href="#roles">Roles</a>
+          <a href="#game">Mini Game</a>
           <a href="#order">Order</a>
         </div>
       </nav>
@@ -34,21 +34,28 @@
       <section class="hero" id="home">
         <div class="hero-copy">
           <p class="eyebrow">Santo Domingo Oeste, Dominican Republic</p>
-          <h1>Double Click</h1>
+          <h1 aria-label="Double Click Pizzeria"><span>Double Click</span> Pizzeria</h1>
           <p class="tagline">
-            A modern casual restaurant where tech-inspired energy meets fresh comfort food, friendly service and memorable flavor.
+            One click, one slice, full flavor. Fresh pizza, bold drinks and a playful tech-inspired menu.
           </p>
           <div class="hero-meta" aria-label="Quick facts">
-            <span>Open today</span>
-            <span>Reservations available</span>
+            <span>Wood-fired style</span>
+            <span>Mini game rewards</span>
             <span>Prices in USD</span>
           </div>
           <div class="hero-actions">
             <a class="primary-action" href="#menu">View menu</a>
+            <a class="secondary-action" href="#game">Play to win</a>
           </div>
         </div>
-        <div class="hero-plate logo-showcase" aria-label="Double Click logo">
-          <img src="./assets/double-click-logo.svg" alt="Double Click restaurant logo" />
+        <div class="pizza-hero" aria-label="Illustrated pizza">
+          <div class="pizza-board">
+            <span class="pizza-slice s1"></span>
+            <span class="pizza-slice s2"></span>
+            <span class="pizza-slice s3"></span>
+            <span class="pizza-slice s4"></span>
+            <span class="pizza-center"></span>
+          </div>
         </div>
       </section>
     </header>
@@ -58,17 +65,17 @@
         <article>
           <span class="info-icon">i</span>
           <h2>Type</h2>
-          <p>Casual dining restaurant with a tropical fusion atmosphere.</p>
+          <p>Casual pizzeria with a vintage menu look and playful tech personality.</p>
         </article>
         <article>
           <span class="info-icon">$</span>
           <h2>Prices</h2>
-          <p>Drinks and dishes from <strong>$2.00</strong> to <strong>$22.00</strong>.</p>
+          <p>Pizza, drinks and sides from <strong>$1.99</strong> to <strong>$18.99</strong>.</p>
         </article>
         <article>
           <span class="info-icon">m</span>
           <h2>Mission</h2>
-          <p>To serve fresh food, clear service and memorable experiences.</p>
+          <p>To serve hot slices, quick service and a memorable Double Click experience.</p>
         </article>
       </section>
 
@@ -77,49 +84,45 @@
           <div class="section-heading">
             <div>
               <p class="eyebrow">Digital Menu</p>
-              <h2>Fresh picks, made to order</h2>
+              <h2>Pizzeria favorites</h2>
             </div>
             <p class="menu-note">
-              Browse by category, choose your favorites and build a clean table order in seconds.
+              Choose a pizza, add a side or drink, then build your order in seconds.
             </p>
           </div>
         </div>
         <div class="menu-controls" role="tablist" aria-label="Menu categories">
           <button class="tab active" data-category="all" role="tab" aria-selected="true">All</button>
+          <button class="tab" data-category="pizzas" role="tab" aria-selected="false">Pizzas</button>
           <button class="tab" data-category="beverages" role="tab" aria-selected="false">Beverages</button>
-          <button class="tab" data-category="appetizers" role="tab" aria-selected="false">Appetizers</button>
-          <button class="tab" data-category="mains" role="tab" aria-selected="false">Main Courses</button>
+          <button class="tab" data-category="sides" role="tab" aria-selected="false">Sides</button>
           <button class="tab" data-category="desserts" role="tab" aria-selected="false">Desserts</button>
         </div>
         <div class="menu-grid" id="menuGrid"></div>
       </section>
 
-      <section class="section roles-section" id="roles">
-        <div class="section-heading">
-          <p class="eyebrow">Team</p>
-          <h2>Restaurant roles</h2>
-        </div>
-        <div class="roles-grid">
-          <article class="role-card">
-            <div class="role-avatar host-avatar"></div>
-            <h3>Host</h3>
-            <p>Greets customers, confirms reservations and guides guests to their table.</p>
-          </article>
-          <article class="role-card">
-            <div class="role-avatar server-avatar"></div>
-            <h3>Server</h3>
-            <p>Takes orders, serves drinks and keeps the experience clear and pleasant.</p>
-          </article>
-          <article class="role-card">
-            <div class="role-avatar chef-avatar"></div>
-            <h3>Chef 1</h3>
-            <p>Prepares appetizers and main courses with fresh local ingredients.</p>
-          </article>
-          <article class="role-card">
-            <div class="role-avatar chef-avatar alt"></div>
-            <h3>Chef 2</h3>
-            <p>Prepares desserts and presents the chef's specialty to the customer.</p>
-          </article>
+      <section class="section game-section" id="game">
+        <div class="game-card">
+          <div class="game-copy">
+            <p class="eyebrow">Mini Game</p>
+            <h2>Catch the slice</h2>
+            <p>
+              Catch the moving pizza slice before time runs out. Score 12 or more to unlock a small reward.
+            </p>
+            <div class="game-stats" aria-live="polite">
+              <span>Score: <strong id="gameScore">0</strong>/12</span>
+              <span>Time: <strong id="gameTime">15</strong>s</span>
+              <span id="rewardBadge">Reward locked</span>
+            </div>
+            <div class="game-actions">
+              <button class="primary-action button-reset" id="startGame">Start game</button>
+              <button class="secondary-action button-reset" id="resetGame">Reset</button>
+            </div>
+          </div>
+          <div class="game-board slice-board" id="gameBoard" aria-label="Catch the pizza slice mini game">
+            <button class="slice-target" id="sliceTarget" type="button" aria-label="Catch pizza slice">Slice</button>
+            <p class="game-message" id="gameMessage">Press start, then catch the slice as fast as you can.</p>
+          </div>
         </div>
       </section>
 
@@ -131,9 +134,9 @@
         <div class="order-layout">
           <div class="chef-special">
             <p class="eyebrow">Specialty</p>
-            <h3>Chef's Tropical Signature Dish</h3>
-            <p>Grilled fish with mango salsa, aromatic rice and sauteed vegetables.</p>
-            <button class="primary-action button-reset" id="addSpecial">Add $18.00</button>
+            <h3>The Double Click Pizza</h3>
+            <p>Pepperoni, Italian sausage, mushrooms, red onions and bell peppers on a thick crust.</p>
+            <button class="primary-action button-reset" id="addSpecial">Add $18.99</button>
           </div>
           <div class="receipt">
             <div class="receipt-top">
@@ -152,9 +155,9 @@
 
     <footer>
       <span>Colegio Elvira de Mendoza, Santo Domingo Oeste</span>
-      <strong>Good food. Good service. Great memories.</strong>
+      <strong>One click. One slice. Full flavor.</strong>
     </footer>
 
-    <script src="./app.js?v=7"></script>
+    <script src="./app.js?v=10"></script>
   </body>
 </html>
