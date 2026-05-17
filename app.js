@@ -114,7 +114,7 @@ const state = {
   rewardUnlocked: false,
   gameRunning: false,
   gameScore: 0,
-  gameTime: 15,
+  gameTime: 12,
   timer: null,
 };
 
@@ -252,7 +252,7 @@ function updateGameDisplay() {
 
 function moveSlice() {
   const board = gameBoard.getBoundingClientRect();
-  const targetSize = 54;
+  const targetSize = 42;
   const maxX = Math.max(0, board.width - targetSize);
   const maxY = Math.max(0, board.height - targetSize);
   const x = Math.floor(Math.random() * maxX);
@@ -276,10 +276,10 @@ function startMiniGame() {
   state.gameRunning = true;
   state.rewardUnlocked = false;
   state.gameScore = 0;
-  state.gameTime = 15;
+  state.gameTime = 12;
   startGame.disabled = true;
   sliceTarget.classList.add("active");
-  gameMessage.textContent = "Catch 12 slices before time runs out.";
+  gameMessage.textContent = "Catch 18 tiny slices before time runs out.";
   updateGameDisplay();
   moveSlice();
 
@@ -289,7 +289,7 @@ function startMiniGame() {
     updateGameDisplay();
 
     if (state.gameTime <= 0) {
-      if (state.gameScore >= 12) {
+      if (state.gameScore >= 18) {
         state.rewardUnlocked = true;
         finishGame("You won! Your $3 reward is unlocked.");
       } else {
@@ -302,7 +302,7 @@ function startMiniGame() {
 function resetMiniGame() {
   state.gameRunning = false;
   state.gameScore = 0;
-  state.gameTime = 15;
+  state.gameTime = 12;
   state.rewardUnlocked = false;
   clearInterval(state.timer);
   startGame.disabled = false;
@@ -317,11 +317,11 @@ function catchSlice() {
   if (!state.gameRunning) return;
 
   state.gameScore += 1;
-  gameMessage.textContent = state.gameScore >= 9 ? "Almost there. Keep clicking!" : "Nice catch!";
+  gameMessage.textContent = state.gameScore >= 14 ? "Almost there. Keep clicking!" : "Nice catch!";
   updateGameDisplay();
   moveSlice();
 
-  if (state.gameScore >= 12) {
+  if (state.gameScore >= 18) {
     state.rewardUnlocked = true;
     finishGame("You won! Your $3 reward is unlocked.");
   }

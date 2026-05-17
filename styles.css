@@ -644,13 +644,13 @@ footer {
   position: absolute;
   left: 0;
   top: 0;
-  width: 54px;
-  height: 54px;
+  width: 42px;
+  height: 42px;
   border: 0;
   background: transparent;
   color: transparent;
   cursor: pointer;
-  transition: transform 110ms ease;
+  transition: transform 70ms ease;
   z-index: 2;
 }
 
