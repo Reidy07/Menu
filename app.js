@@ -232,13 +232,12 @@ function renderOrder() {
     .join("");
 
   const subtotal = getSubtotal();
-  const discount = state.rewardUnlocked ? Math.min(3, subtotal) : 0;
-  orderTotal.textContent = formatUsd(subtotal - discount);
+  orderTotal.textContent = formatUsd(subtotal);
 
   if (state.rewardUnlocked && !document.querySelector(".reward-line")) {
     orderList.insertAdjacentHTML(
       "beforeend",
-      `<li class="reward-line"><span>Mini game reward</span><strong>-${formatUsd(discount)}</strong><span></span></li>`,
+      `<li class="reward-line"><span>Mini game prize</span><strong>Sweet treat</strong><span></span></li>`,
     );
   }
 }
@@ -246,7 +245,7 @@ function renderOrder() {
 function updateGameDisplay() {
   gameScore.textContent = state.gameScore;
   gameTime.textContent = state.gameTime;
-  rewardBadge.textContent = state.rewardUnlocked ? "Reward unlocked: $3 off" : "Reward locked";
+  rewardBadge.textContent = state.rewardUnlocked ? "You won a sweet treat!" : "Sweet treat locked";
   rewardBadge.classList.toggle("unlocked", state.rewardUnlocked);
 }
 
@@ -291,7 +290,7 @@ function startMiniGame() {
     if (state.gameTime <= 0) {
       if (state.gameScore >= 18) {
         state.rewardUnlocked = true;
-        finishGame("You won! Your $3 reward is unlocked.");
+        finishGame("You won! Claim your sweet treat at the counter.");
       } else {
         finishGame("Time is up. Reset and try again for the reward.");
       }
@@ -323,7 +322,7 @@ function catchSlice() {
 
   if (state.gameScore >= 18) {
     state.rewardUnlocked = true;
-    finishGame("You won! Your $3 reward is unlocked.");
+    finishGame("You won! Claim your sweet treat at the counter.");
   }
 }
 
