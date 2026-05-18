@@ -23,7 +23,7 @@ const menuItems = [
   },
   {
     id: "cloud-cuatro-quesos",
-    name: "Cloud Cuatro Quesos",
+    name: "Cloud Four Cheese",
     category: "pizzas",
     price: 17.99,
     detail: "Mozzarella, gorgonzola, provolone and parmesan with white truffle oil.",
