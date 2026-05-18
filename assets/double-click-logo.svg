@@ -72,7 +72,7 @@
 
   <path id="bottomArc" d="M150 572a330 330 0 0 0 600 0" fill="none"/>
   <text font-family="Arial Black, Arial, sans-serif" font-size="35" font-weight="900" letter-spacing="1.2" class="ink">
-    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">RESTAURANTE - ESPECIALIDAD EN HORNO DE LENA - PIZZERIA</textPath>
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">RESTAURANT - WOOD-FIRED SPECIALTY - PIZZERIA</textPath>
   </text>
 
   <circle cx="450" cy="450" r="392" fill="none" stroke="#6d4b2b" stroke-width="7" opacity=".55"/>
