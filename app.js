@@ -109,26 +109,33 @@ const menuItems = [
 ];
 
 const state = {
-  filter: "all",
   order: [],
   rewardUnlocked: false,
   gameRunning: false,
   gameScore: 0,
   gameTime: 12,
   timer: null,
+  soundEnabled: false,
+  audioContext: null,
 };
 
 const menuGrid = document.querySelector("#menuGrid");
 const orderList = document.querySelector("#orderList");
 const orderTotal = document.querySelector("#orderTotal");
+const orderChipTotal = document.querySelector("#orderChipTotal");
+const orderChipCount = document.querySelector("#orderChipCount");
 const gameScore = document.querySelector("#gameScore");
 const gameTime = document.querySelector("#gameTime");
 const rewardBadge = document.querySelector("#rewardBadge");
 const startGame = document.querySelector("#startGame");
 const resetGame = document.querySelector("#resetGame");
+const soundToggle = document.querySelector("#soundToggle");
 const gameMessage = document.querySelector("#gameMessage");
 const gameBoard = document.querySelector("#gameBoard");
+const gameBurst = document.querySelector("#gameBurst");
 const sliceTarget = document.querySelector("#sliceTarget");
+const prizeModal = document.querySelector("#prizeModal");
+const closePrize = document.querySelector("#closePrize");
 
 function formatUsd(value) {
   return new Intl.NumberFormat("en-US", {
@@ -138,41 +145,50 @@ function formatUsd(value) {
 }
 
 function renderMenu() {
-  const items =
-    state.filter === "all" ? menuItems : menuItems.filter((item) => item.category === state.filter);
+  const sections = [
+    { category: "pizzas", title: "Pizzas", note: "Wood-fired style favorites" },
+    { category: "beverages", title: "Beverages", note: "Fresh and cold drinks" },
+    { category: "sides", title: "Sides", note: "Perfect with every slice" },
+    { category: "desserts", title: "Desserts", note: "Sweet finish" },
+  ];
 
-  menuGrid.innerHTML = items
-    .map(
-      (item) => `
-        <article class="menu-card ${item.featured ? "featured" : ""}">
-          <div class="menu-visual ${item.category}">
-            <span class="menu-symbol" aria-hidden="true">${categorySymbol(item.category)}</span>
-            <span class="menu-badge">${categoryLabel(item.category)}</span>
-            ${item.featured ? '<span class="chef-pick">Chef pick</span>' : ""}
+  menuGrid.innerHTML = sections
+    .map((section) => {
+      const sectionItems = menuItems.filter((item) => item.category === section.category);
+
+      return `
+        <section class="poster-section ${section.category}">
+          <div class="poster-section-head">
+            <span class="poster-icon">${categorySymbol(section.category)}</span>
+            <div>
+              <h3>${section.title}</h3>
+              <p>${section.note}</p>
+            </div>
           </div>
-          <div class="menu-card-body">
-            <h3>${item.name}</h3>
-            <p>${item.detail}</p>
+          <div class="poster-items">
+            ${sectionItems.map(renderPosterItem).join("")}
           </div>
-          <div class="price-row">
-            <span class="price">${formatUsd(item.price)}</span>
-            <button type="button" data-add="${item.id}" aria-label="Add ${item.name}">Add</button>
-          </div>
-        </article>
-      `,
-    )
+        </section>
+      `;
+    })
     .join("");
 }
 
-function categoryLabel(category) {
-  const labels = {
-    pizzas: "Pizza",
-    beverages: "Drink",
-    sides: "Side",
-    desserts: "Dessert",
-  };
-
-  return labels[category] || "Menu item";
+function renderPosterItem(item) {
+  return `
+    <article class="poster-item ${item.featured ? "featured" : ""}">
+      <div class="poster-item-main">
+        <div class="poster-title-row">
+          <h4>${item.name}</h4>
+          ${item.featured ? '<span class="chef-pick">Chef pick</span>' : ""}
+        </div>
+        <p>${item.detail}</p>
+      </div>
+      <span class="price-dots" aria-hidden="true"></span>
+      <strong class="poster-price">${formatUsd(item.price)}</strong>
+      <button type="button" data-add="${item.id}" aria-label="Add ${item.name}">Add</button>
+    </article>
+  `;
 }
 
 function categorySymbol(category) {
@@ -213,6 +229,12 @@ function getSubtotal() {
 }
 
 function renderOrder() {
+  const subtotal = getSubtotal();
+  const itemCount = state.order.reduce((sum, item) => sum + item.quantity, 0);
+
+  orderChipTotal.textContent = formatUsd(subtotal);
+  orderChipCount.textContent = `${itemCount} ${itemCount === 1 ? "item" : "items"}`;
+
   if (state.order.length === 0) {
     orderList.innerHTML = "<li><span>No items yet</span><span></span><span></span></li>";
     orderTotal.textContent = formatUsd(0);
@@ -231,7 +253,6 @@ function renderOrder() {
     )
     .join("");
 
-  const subtotal = getSubtotal();
   orderTotal.textContent = formatUsd(subtotal);
 
   if (state.rewardUnlocked && !document.querySelector(".reward-line")) {
@@ -247,6 +268,61 @@ function updateGameDisplay() {
   gameTime.textContent = state.gameTime;
   rewardBadge.textContent = state.rewardUnlocked ? "You won a sweet treat!" : "Sweet treat locked";
   rewardBadge.classList.toggle("unlocked", state.rewardUnlocked);
+  soundToggle.textContent = state.soundEnabled ? "Sound on" : "Sound off";
+  soundToggle.setAttribute("aria-pressed", String(state.soundEnabled));
+}
+
+function getAudioContext() {
+  if (!state.audioContext) {
+    const AudioEngine = window.AudioContext || window.webkitAudioContext;
+    state.audioContext = new AudioEngine();
+  }
+
+  return state.audioContext;
+}
+
+function playTone(frequency, duration = 0.08, type = "sine") {
+  if (!state.soundEnabled) return;
+
+  const audio = getAudioContext();
+  const oscillator = audio.createOscillator();
+  const gain = audio.createGain();
+
+  oscillator.type = type;
+  oscillator.frequency.value = frequency;
+  gain.gain.setValueAtTime(0.0001, audio.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.16, audio.currentTime + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + duration);
+  oscillator.connect(gain);
+  gain.connect(audio.destination);
+  oscillator.start();
+  oscillator.stop(audio.currentTime + duration + 0.02);
+}
+
+function playCatchSound() {
+  playTone(520, 0.07, "triangle");
+}
+
+function playWinSound() {
+  [440, 554, 659, 880].forEach((note, index) => {
+    setTimeout(() => playTone(note, 0.12, "triangle"), index * 110);
+  });
+}
+
+function showCatchBurst() {
+  gameBurst.classList.remove("pop");
+  void gameBurst.offsetWidth;
+  gameBurst.classList.add("pop");
+}
+
+function showPrizeModal() {
+  prizeModal.classList.add("show");
+  prizeModal.setAttribute("aria-hidden", "false");
+}
+
+function hidePrizeModal() {
+  prizeModal.classList.remove("show");
+  prizeModal.setAttribute("aria-hidden", "true");
 }
 
 function moveSlice() {
@@ -307,6 +383,7 @@ function resetMiniGame() {
   startGame.disabled = false;
   sliceTarget.classList.remove("active");
   sliceTarget.style.transform = "translate(50%, 50%)";
+  hidePrizeModal();
   gameMessage.textContent = "Press start, then catch the slice as fast as you can.";
   updateGameDisplay();
   renderOrder();
@@ -317,27 +394,18 @@ function catchSlice() {
 
   state.gameScore += 1;
   gameMessage.textContent = state.gameScore >= 14 ? "Almost there. Keep clicking!" : "Nice catch!";
+  playCatchSound();
+  showCatchBurst();
   updateGameDisplay();
   moveSlice();
 
   if (state.gameScore >= 18) {
     state.rewardUnlocked = true;
+    playWinSound();
+    showPrizeModal();
     finishGame("You won! Claim your sweet treat at the counter.");
   }
 }
-
-document.querySelector(".menu-controls").addEventListener("click", (event) => {
-  const button = event.target.closest("[data-category]");
-  if (!button) return;
-
-  state.filter = button.dataset.category;
-  document.querySelectorAll(".tab").forEach((tab) => {
-    const active = tab === button;
-    tab.classList.toggle("active", active);
-    tab.setAttribute("aria-selected", String(active));
-  });
-  renderMenu();
-});
 
 menuGrid.addEventListener("click", (event) => {
   const button = event.target.closest("[data-add]");
@@ -357,7 +425,16 @@ document.querySelector("#clearOrder").addEventListener("click", () => {
 
 startGame.addEventListener("click", startMiniGame);
 resetGame.addEventListener("click", resetMiniGame);
+soundToggle.addEventListener("click", () => {
+  state.soundEnabled = !state.soundEnabled;
+  if (state.soundEnabled) {
+    getAudioContext().resume();
+    playTone(660, 0.08, "triangle");
+  }
+  updateGameDisplay();
+});
 sliceTarget.addEventListener("click", catchSlice);
+closePrize.addEventListener("click", hidePrizeModal);
 
 renderMenu();
 renderOrder();

@@ -98,6 +98,7 @@ a {
   object-fit: contain;
   background: var(--paper);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+  animation: logoFloat 4.8s ease-in-out infinite;
 }
 
 .nav-links {
@@ -111,11 +112,16 @@ a {
 .nav-links a {
   padding: 10px 13px;
   border-radius: 999px;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
 }
 
 .nav-links a:hover {
   background: rgba(247, 239, 223, 0.12);
   color: white;
+  transform: translateY(-1px);
 }
 
 .hero {
@@ -198,8 +204,8 @@ a {
 .secondary-action,
 .button-reset,
 .text-button,
-.tab,
-.menu-card button {
+.sound-toggle,
+.tab {
   border: 0;
   font: inherit;
   cursor: pointer;
@@ -214,6 +220,17 @@ a {
   padding: 0 18px;
   border-radius: 999px;
   font-weight: 900;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.primary-action:hover,
+.secondary-action:hover,
+.poster-item button:hover,
+.text-button:hover {
+  transform: translateY(-2px);
 }
 
 .primary-action {
@@ -226,6 +243,16 @@ a {
   color: var(--chalk);
   border: 2px solid rgba(247, 239, 223, 0.2);
   background: rgba(247, 239, 223, 0.08);
+}
+
+.sound-toggle {
+  min-height: 46px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 2px solid rgba(32, 32, 28, 0.18);
+  background: rgba(255, 253, 246, 0.54);
+  color: var(--ink);
+  font-weight: 900;
 }
 
 .pizza-hero {
@@ -243,6 +270,7 @@ a {
     radial-gradient(circle at 50% 50%, transparent 0 51%, rgba(84, 45, 21, 0.9) 52% 58%, #b47a3b 59% 62%, transparent 63%),
     radial-gradient(circle, #f6d884 0 48%, #e0a850 49% 59%, #8a4a21 60% 63%, transparent 64%);
   filter: drop-shadow(0 32px 34px rgba(0, 0, 0, 0.34));
+  animation: pizzaFloat 5.8s ease-in-out infinite;
 }
 
 .pizza-board::before,
@@ -317,11 +345,97 @@ a {
     0 -22px 0 #5b8b3c;
 }
 
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+}
+
+@keyframes pizzaFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+@keyframes softPulse {
+  0%,
+  100% {
+    box-shadow: 0 14px 28px rgba(184, 68, 49, 0.28);
+  }
+
+  50% {
+    box-shadow: 0 18px 38px rgba(184, 68, 49, 0.42);
+  }
+}
+
+.hero .primary-action {
+  animation: softPulse 3.2s ease-in-out infinite;
+}
+
 .info-band,
 .section,
 footer {
   width: min(1160px, calc(100% - 32px));
   margin: 0 auto;
+}
+
+.order-chip {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 20;
+  min-width: 172px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 10px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 2px solid rgba(247, 239, 223, 0.22);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(126, 36, 28, 0.96), rgba(16, 17, 15, 0.96)),
+    var(--black);
+  color: var(--chalk);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.34);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.order-chip:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 44px rgba(0, 0, 0, 0.42);
+}
+
+.order-chip span {
+  color: var(--gold);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.order-chip strong {
+  grid-row: span 2;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.order-chip em {
+  color: rgba(247, 239, 223, 0.72);
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 900;
 }
 
 .info-band {
@@ -362,7 +476,6 @@ footer {
 
 .info-band p,
 .chef-special p,
-.menu-card p,
 .game-copy p {
   margin: 0;
   color: rgba(247, 239, 223, 0.72);
@@ -435,140 +548,166 @@ footer {
   font-weight: 800;
 }
 
-.menu-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.tab {
-  min-height: 44px;
-  padding: 0 18px;
-  border-radius: 999px;
-  background: rgba(247, 239, 223, 0.08);
-  border: 1px solid rgba(247, 239, 223, 0.18);
-  color: var(--chalk);
-  font-weight: 900;
-}
-
-.tab:hover,
-.tab.active {
-  background: var(--red);
-  color: white;
-  border-color: var(--red);
-}
-
-.menu-grid {
+.poster-menu {
+  padding: 30px;
+  border: 2px solid rgba(32, 32, 28, 0.72);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(251, 240, 215, 0.98), rgba(238, 220, 188, 0.96)),
+    var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.menu-card {
-  min-height: 182px;
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
-  overflow: hidden;
-  border: 1px dashed rgba(32, 32, 28, 0.32);
-  border-radius: 8px;
-  background: rgba(251, 240, 215, 0.96);
-  color: var(--ink);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
-}
-
-.menu-card.featured {
-  border-color: var(--red);
-}
-
-.menu-visual {
-  min-height: 100%;
-  padding: 14px;
-  background:
-    radial-gradient(circle at 55% 42%, rgba(184, 68, 49, 0.82) 0 16%, transparent 17%),
-    radial-gradient(circle at 34% 64%, rgba(184, 68, 49, 0.82) 0 12%, transparent 13%),
-    radial-gradient(circle at 70% 72%, rgba(98, 125, 60, 0.82) 0 10%, transparent 11%),
-    radial-gradient(circle, #f4d37d 0 45%, #9e5b24 46% 50%, transparent 51%);
+  gap: 28px 34px;
   position: relative;
 }
 
-.menu-symbol {
+.poster-menu::before {
+  content: "";
   position: absolute;
-  inset: auto 12px 6px auto;
-  color: rgba(0, 0, 0, 0.16);
+  inset: 12px;
+  border: 1px solid rgba(32, 32, 28, 0.22);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.poster-section {
+  position: relative;
+  z-index: 1;
+}
+
+.poster-section-head {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed rgba(32, 32, 28, 0.28);
+}
+
+.poster-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 3px solid currentColor;
+  border-radius: 50%;
   font-family: "Bebas Neue", Impact, sans-serif;
-  font-size: 4.5rem;
+  font-size: 2.1rem;
   line-height: 1;
 }
 
-.menu-badge,
-.chef-pick {
-  position: absolute;
-  z-index: 1;
-  padding: 6px 9px;
-  border-radius: 999px;
-  font-size: 0.68rem;
-  font-weight: 900;
-  text-transform: uppercase;
+.poster-section h3 {
+  margin: 0;
+  color: var(--red);
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  line-height: 0.9;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.menu-badge {
-  left: 10px;
-  top: 10px;
-  color: white;
+.poster-section-head p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.poster-items {
+  display: grid;
+  gap: 14px;
+}
+
+.poster-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(48px, 1fr) auto auto;
+  align-items: end;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(32, 32, 28, 0.08);
+  transition:
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.poster-item:hover {
+  transform: translateX(4px);
+  background: rgba(255, 253, 246, 0.36);
+}
+
+.poster-item-main {
+  min-width: 0;
+}
+
+.poster-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.poster-item h4 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.02rem;
+  line-height: 1.2;
+}
+
+.poster-item p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  line-height: 1.35;
+  font-size: 0.92rem;
+}
+
+.price-dots {
+  align-self: center;
+  min-width: 42px;
+  border-bottom: 2px dotted rgba(32, 32, 28, 0.42);
+  transform: translateY(-5px);
+}
+
+.poster-price {
+  color: var(--ink);
+  font-size: 1.02rem;
+  white-space: nowrap;
+}
+
+.poster-item button {
+  min-width: 62px;
+  min-height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--black);
+  color: var(--chalk);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 900;
+  transition:
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.poster-item button:hover {
   background: var(--red);
 }
 
 .chef-pick {
-  left: 10px;
-  bottom: 10px;
-  color: #20140c;
-  background: var(--gold);
-}
-
-.menu-card-body {
-  padding: 18px 18px 0;
-}
-
-.menu-card h3 {
-  margin: 0;
-  font-size: 1.12rem;
-  line-height: 1.22;
-}
-
-.menu-card p {
-  margin: 8px 0 0;
-  color: var(--muted);
-}
-
-.menu-card .price-row {
-  grid-column: 2;
-  align-self: end;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 18px 18px;
-}
-
-.price {
   display: inline-flex;
   align-items: center;
-  color: var(--red-dark);
-  font-weight: 900;
-  white-space: nowrap;
-}
-
-.menu-card button {
-  min-width: 76px;
-  min-height: 38px;
-  padding: 0 14px;
+  min-height: 22px;
+  padding: 0 8px;
   border-radius: 999px;
-  background: var(--black);
-  color: var(--chalk);
-  font-size: 0.9rem;
+  color: #20140c;
+  background: var(--gold);
+  font-size: 0.62rem;
   font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .game-card {
@@ -654,6 +793,10 @@ footer {
   z-index: 2;
 }
 
+.slice-target.active {
+  animation: sliceWiggle 520ms ease-in-out infinite;
+}
+
 .slice-target::before {
   content: "";
   position: absolute;
@@ -672,12 +815,125 @@ footer {
   pointer-events: none;
 }
 
+.game-burst {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.3);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(216, 161, 95, 0.55), transparent 18%),
+    conic-gradient(from 0deg, transparent 0 10%, var(--red) 10% 14%, transparent 14% 25%, var(--gold) 25% 30%, transparent 30% 45%, var(--green) 45% 50%, transparent 50% 65%, var(--red) 65% 70%, transparent 70% 100%);
+  pointer-events: none;
+}
+
+.game-burst.pop {
+  animation: burstPop 420ms ease-out;
+}
+
 .game-message {
   grid-column: 1 / -1;
   margin: 0;
   color: var(--muted);
   font-weight: 900;
   text-align: center;
+}
+
+.prize-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.62);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.prize-modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.prize-card {
+  width: min(100%, 440px);
+  padding: 30px;
+  border: 2px solid rgba(32, 32, 28, 0.7);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(251, 240, 215, 0.98), rgba(238, 220, 188, 0.96)),
+    var(--paper);
+  color: var(--ink);
+  text-align: center;
+  box-shadow: var(--shadow);
+  transform: translateY(10px) scale(0.96);
+  transition: transform 180ms ease;
+}
+
+.prize-modal.show .prize-card {
+  transform: translateY(0) scale(1);
+}
+
+.prize-icon {
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--red);
+  color: white;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-size: 1.5rem;
+  box-shadow: 0 16px 28px rgba(184, 68, 49, 0.28);
+}
+
+.prize-card h2 {
+  margin: 0;
+  font-family: "Bebas Neue", Impact, sans-serif;
+  font-size: clamp(2.4rem, 7vw, 3.5rem);
+  font-weight: 400;
+  line-height: 0.92;
+}
+
+.prize-card p {
+  margin: 12px 0 20px;
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+@keyframes sliceWiggle {
+  0%,
+  100% {
+    filter: drop-shadow(0 10px 12px rgba(32, 32, 28, 0.28));
+  }
+
+  50% {
+    filter: drop-shadow(0 16px 18px rgba(184, 68, 49, 0.36));
+  }
+}
+
+@keyframes burstPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.24) rotate(0deg);
+  }
+
+  28% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.35) rotate(110deg);
+  }
 }
 
 .order-layout {
@@ -808,11 +1064,20 @@ footer strong {
     min-height: 340px;
   }
 
+  .pizza-board {
+    width: min(100%, 400px);
+  }
+
   .info-band {
     grid-template-columns: 1fr;
+    transform: translateY(-16px);
   }
 
   .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .poster-menu {
     grid-template-columns: 1fr;
   }
 
@@ -823,30 +1088,84 @@ footer strong {
 }
 
 @media (max-width: 640px) {
+  body {
+    padding-bottom: 86px;
+  }
+
   .topbar {
     align-items: flex-start;
     flex-direction: column;
-    padding: 18px 0;
+    gap: 14px;
+    padding: 16px 0;
   }
 
   .nav-links {
     width: 100%;
     overflow-x: auto;
     padding-bottom: 4px;
+    gap: 6px;
+  }
+
+  .nav-links a {
+    flex: 0 0 auto;
+    padding: 9px 11px;
+    font-size: 0.92rem;
   }
 
   .hero {
-    padding-top: 18px;
+    padding: 14px 0 48px;
+    gap: 28px;
   }
 
   .hero h1 {
-    font-size: clamp(4rem, 20vw, 6rem);
+    font-size: clamp(3.6rem, 19vw, 5.4rem);
+  }
+
+  .hero h1 span {
+    font-size: clamp(2.35rem, 13vw, 4.2rem);
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .hero-meta span {
+    font-size: 0.76rem;
+  }
+
+  .hero-actions,
+  .game-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primary-action,
+  .secondary-action,
+  .sound-toggle {
+    width: 100%;
+  }
+
+  .pizza-hero {
+    min-height: 260px;
+  }
+
+  .pizza-board {
+    width: min(100%, 280px);
+  }
+
+  .info-band article {
+    padding: 18px;
   }
 
   .section-heading,
   footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .section-heading h2,
+  .game-copy h2 {
+    font-size: clamp(2.4rem, 16vw, 3.7rem);
   }
 
   .menu-head,
@@ -856,11 +1175,77 @@ footer strong {
     padding: 20px;
   }
 
-  .menu-card {
-    grid-template-columns: 92px minmax(0, 1fr);
+  .poster-menu {
+    padding: 20px;
   }
 
-  .menu-card .price-row {
+  .poster-section-head {
+    grid-template-columns: 44px 1fr;
+  }
+
+  .poster-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.75rem;
+  }
+
+  .poster-item {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 8px;
+  }
+
+  .price-dots {
+    display: none;
+  }
+
+  .poster-item button {
     grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .game-board {
+    min-height: 320px;
+    padding: 16px;
+  }
+
+  .slice-board {
+    min-height: 330px;
+  }
+
+  .order-layout {
+    grid-template-columns: 1fr;
+  }
+
+  #orderList li {
+    grid-template-columns: 1fr auto;
+  }
+
+  #orderList button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .receipt-top,
+  .receipt-total {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .order-chip {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    min-width: 0;
+    grid-template-columns: 1fr auto;
+    padding: 11px 13px;
+  }
+
+  .order-chip strong {
+    font-size: 1rem;
+  }
+
+  .prize-card {
+    padding: 24px;
   }
 }

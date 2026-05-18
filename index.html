@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800;900&family=Pacifico&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=12" />
+    <link rel="stylesheet" href="./styles.css?v=15" />
   </head>
   <body>
     <header class="app-header">
@@ -61,6 +61,12 @@
     </header>
 
     <main>
+      <a class="order-chip" href="#order" aria-label="View current order">
+        <span>Order</span>
+        <strong id="orderChipTotal">$0.00</strong>
+        <em id="orderChipCount">0 items</em>
+      </a>
+
       <section class="info-band" aria-label="Restaurant information">
         <article>
           <span class="info-icon">i</span>
@@ -91,14 +97,7 @@
             </p>
           </div>
         </div>
-        <div class="menu-controls" role="tablist" aria-label="Menu categories">
-          <button class="tab active" data-category="all" role="tab" aria-selected="true">All</button>
-          <button class="tab" data-category="pizzas" role="tab" aria-selected="false">Pizzas</button>
-          <button class="tab" data-category="beverages" role="tab" aria-selected="false">Beverages</button>
-          <button class="tab" data-category="sides" role="tab" aria-selected="false">Sides</button>
-          <button class="tab" data-category="desserts" role="tab" aria-selected="false">Desserts</button>
-        </div>
-        <div class="menu-grid" id="menuGrid"></div>
+        <div class="poster-menu" id="menuGrid"></div>
       </section>
 
       <section class="section game-section" id="game">
@@ -117,9 +116,11 @@
             <div class="game-actions">
               <button class="primary-action button-reset" id="startGame">Start game</button>
               <button class="secondary-action button-reset" id="resetGame">Reset</button>
+              <button class="sound-toggle button-reset" id="soundToggle" type="button" aria-pressed="false">Sound off</button>
             </div>
           </div>
           <div class="game-board slice-board" id="gameBoard" aria-label="Catch the pizza slice mini game">
+            <div class="game-burst" id="gameBurst" aria-hidden="true"></div>
             <button class="slice-target" id="sliceTarget" type="button" aria-label="Catch pizza slice">Slice</button>
             <p class="game-message" id="gameMessage">Press start, then catch the slice as fast as you can.</p>
           </div>
@@ -158,6 +159,15 @@
       <strong>One click. One slice. Full flavor.</strong>
     </footer>
 
-    <script src="./app.js?v=12"></script>
+    <div class="prize-modal" id="prizeModal" aria-live="polite" aria-hidden="true">
+      <div class="prize-card">
+        <span class="prize-icon" aria-hidden="true">Sweet</span>
+        <h2>You won a sweet treat!</h2>
+        <p>Show this screen at the counter to claim your prize.</p>
+        <button class="primary-action button-reset" id="closePrize">Back to menu</button>
+      </div>
+    </div>
+
+    <script src="./app.js?v=15"></script>
   </body>
 </html>
